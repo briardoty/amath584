@@ -2,6 +2,7 @@ import os
 import matplotlib.pyplot as plt
 import numpy as np
 from scipy import linalg
+from PIL import Image
 
 def load_cropped():
     
@@ -18,11 +19,15 @@ def load_cropped():
                 continue
             
             filepath = os.path.join(root, filename)
-            im = plt.imread(filepath)
-            im_col = np.reshape(im, -1)
+            img = Image.open(filepath)
+            x, y = img.size
+            img = img.resize((int(x/2), int(y/2)), Image.ANTIALIAS)
+
+            im_arr = np.asarray(img)
+            im_col = np.reshape(im_arr, -1)
             faces_arr.append(im_col)
 
-    x, y = im.shape
+    x, y = im_arr.shape
     return np.transpose(faces_arr), x, y
 
 def main():
