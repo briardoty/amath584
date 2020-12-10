@@ -5,7 +5,7 @@ from scipy import linalg
 from PIL import Image
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 
-def plot_mapping(X, cmap="bwr"):
+def plot_mapping(X, slvr, cmap="bwr"):
     
     vabs = np.max(np.abs(X))
     vmin, vmax = -vabs, vabs
@@ -22,6 +22,7 @@ def plot_mapping(X, cmap="bwr"):
 
     ax.set_ylabel("Digit class")
     ax.set_xlabel("Pixel number")
+    ax.set_title(f"{slvr} solution")
 
     plt.tight_layout()
 
